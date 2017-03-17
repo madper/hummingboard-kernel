@@ -1,0 +1,22 @@
+name: hummingboard-kernel
+version: 3.14
+summary: Kernel
+description: Includes support for humming board.
+type: kernel
+confinement: strict
+grade: stable
+
+parts:
+  kernel:
+    plugin: kernel-madper
+    source: https://github.com/SolidRun/linux-fslc
+    source-type: git
+    source-branch: 3.14-1.0.x-mx6-sr
+    kdefconfig: [imx_v7_cbi_hb_defconfig]
+    kconfigs:
+      - CONFIG_LOCALVERSION="-madper"
+      - CONFIG_SQUASHFS=y
+    kernel-image-target: zImage
+    kernel-device-trees:
+      - imx6q-hummingboard
+    build-packages: [bc, kmod, cpio, lzop, u-boot-tools]
