@@ -29,6 +29,12 @@ parts:
       - CONFIG_SECURITYFS=y
       - CONFIG_SECURITY_NETWORK=y
       - CONFIG_SECURITY_PATH=y
+      - CONFIG_TTY=y
+      - CONFIG_UNIX98_PTYS=y
+      - CONFIG_DEVPTS_MULTIPLE_INSTANCES=y
+      - CONFIG_SECCOMP=y
+      - CONFIG_HAVE_ARCH_SECCOMP_FILTER=y
+      - CONFIG_SECCOMP_FILTER=y
     kernel-image-target: zImage
     kernel-device-trees:
       - imx6q-hummingboard
