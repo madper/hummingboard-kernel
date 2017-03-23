@@ -291,6 +291,7 @@ class KernelMadperPlugin(kbuild.KBuildPlugin):
             'mkimage -n "RamdiskImage" -A arm -O linux -T ramdisk -C gzip -d {} {}'.format(initrd_path, os.path.join(self.installdir, "ramfs.img")), shell=True, cwd=initrd_unpacked_path)
         unversioned_initrd_path = os.path.join(self.installdir, 'initrd.img')
         os.link(initrd_path, unversioned_initrd_path)
+        shutil.copyfile(os.path.join(self.installdir, "ramfs.img"), initrd_path)
 
     def _parse_kernel_release(self):
         kernel_release_path = os.path.join(

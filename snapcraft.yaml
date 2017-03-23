@@ -1,5 +1,5 @@
 name: hummingboard-kernel
-version: 3.14
+version: 4.1rc
 summary: Kernel
 description: Includes support for humming board.
 type: kernel
@@ -9,13 +9,26 @@ grade: stable
 parts:
   kernel:
     plugin: kernel-madper
-    source: https://github.com/SolidRun/linux-fslc
+    source: https://github.com/madper/linux-apparmor-backports.git
     source-type: git
-    source-branch: 3.14-1.0.x-mx6-sr
-    kdefconfig: [imx_v7_cbi_hb_defconfig]
+    source-branch: hb-4.1-aa3.6
+    kdefconfig: [imx_v6_v7_defconfig]
     kconfigs:
-      - CONFIG_LOCALVERSION="-madper"
+      - CONFIG_LOCALVERSION="-lite"
       - CONFIG_SQUASHFS=y
+      - CONFIG_SQUASHFS_XZ=y
+      - CONFIG_SND_SOC_IMX_SGTL5000=n
+      - CONFIG_SECURITY_APPARMOR=y
+      - CONFIG_SECURITY_APPARMOR_BOOTPARAM_VALUE=1
+      - CONFIG_SECURITY_APPARMOR_UNCONFINED_INIT=y
+      - CONFIG_SECURITY_APPARMOR_HASH=y
+      - CONFIG_SECURITY_APPARMOR_HASH_DEFAULT=y
+      - CONFIG_DEFAULT_SECURITY_APPARMOR=y
+      - CONFIG_DEFAULT_SECURITY="apparmor"
+      - CONFIG_SECURITY=y
+      - CONFIG_SECURITYFS=y
+      - CONFIG_SECURITY_NETWORK=y
+      - CONFIG_SECURITY_PATH=y
     kernel-image-target: zImage
     kernel-device-trees:
       - imx6q-hummingboard
